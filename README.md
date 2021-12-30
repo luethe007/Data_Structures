@@ -1,4 +1,4 @@
-# Data_Structures
+# Data Structures
 This repository covers a variety of topics related to data structures.
 
 
