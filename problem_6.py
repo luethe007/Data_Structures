@@ -1,6 +1,4 @@
 # %%
-from problem_2 import test_find_files
-
 class Node:
     def __init__(self, value):
         self.value = value
@@ -19,7 +17,7 @@ class LinkedList:
         while cur_head:
             out_string += str(cur_head.value) + " -> "
             cur_head = cur_head.next
-        return out_string
+        return out_string[:-3]
 
     def append(self, value):
 
@@ -43,22 +41,67 @@ class LinkedList:
         return size
 
 # %%
-def union(llist_1, llist_2):
-    # Your Solution Here
-    pass
+def union(llist_1: LinkedList, llist_2: LinkedList) -> LinkedList:
+    """
+        Unions two linked lists and returns a new linked list.
+    """
+    list_1 = []
+    list_2 = []
+
+    # Loop through first linked list in O(n)
+    node_1 = llist_1.head
+    while node_1:
+        list_1.append(node_1.value)
+        node_1 = node_1.next
+    
+    # Loop through second linked list in O(m)
+    node_2 = llist_2.head
+    while node_2:
+        list_2.append(node_2.value)
+        node_2 = node_2.next
+
+    # Remove duplicates in O(n+m)
+    union_list = list(set(list_1 + list_2))
+
+    # Create new linked list and fill with data, O(p)
+    union_llist = LinkedList()
+    for item in union_list:
+        union_llist.append(item)
+    
+    return union_llist
 
 # %%
-def intersection(llist_1, llist_2):
-    # Your Solution Here
-    pass
+def intersection(llist_1: LinkedList, llist_2: LinkedList) -> LinkedList:
+    """
+        Keeps intersection of two linked lists and returns a new linked list.
+    """
+    # Loop through both linked lists O(n*m)
+    intersection_list = []
+    node_1 = llist_1.head
+    while node_1:
+        node_2 = llist_2.head
+        while node_2:
+            if node_1.value == node_2.value:
+                intersection_list.append(node_1.value)
+                break
+            node_2 = node_2.next
+        node_1 = node_1.next
 
+    # Create new linked lista and fill with data, O(p)
+    intersection_llist = LinkedList()
+    for item in intersection_list:
+        intersection_llist.append(item)
+    
+    return intersection_llist
+
+# %%
 def test_func():
     # Test case 1
     linked_list_1 = LinkedList()
     linked_list_2 = LinkedList()
 
-    element_1 = [3,2,4,35,6,65,6,4,3,21]
-    element_2 = [6,32,4,9,6,1,11,21,1]
+    element_1 = [3,2,4,35]
+    element_2 = [6,32,4,9,3]
 
     for i in element_1:
         linked_list_1.append(i)
@@ -66,15 +109,15 @@ def test_func():
     for i in element_2:
         linked_list_2.append(i)
 
-    print (union(linked_list_1,linked_list_2))
-    print (intersection(linked_list_1,linked_list_2))
+    print(union(linked_list_1,linked_list_2))
+    print(intersection(linked_list_1,linked_list_2))
 
     # Test case 2
     linked_list_3 = LinkedList()
     linked_list_4 = LinkedList()
 
-    element_1 = [3,2,4,35,6,65,6,4,3,23]
-    element_2 = [1,7,8,9,11,21,1]
+    element_1 = [3,2,8,5,66]
+    element_2 = [1,7,8,66]
 
     for i in element_1:
         linked_list_3.append(i)
@@ -82,9 +125,11 @@ def test_func():
     for i in element_2:
         linked_list_4.append(i)
 
-    print (union(linked_list_3,linked_list_4))
-    print (intersection(linked_list_3,linked_list_4))
+    print(union(linked_list_3,linked_list_4))
+    print(intersection(linked_list_3,linked_list_4))
 
-# %%
+
 if __name__ == "__main__":
     test_func()
+
+# %%
