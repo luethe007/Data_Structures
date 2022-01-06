@@ -16,10 +16,16 @@ class Node:
     def __lt__(self, other):
         return self.freq < other.freq
 
-def huffman_encoding(data: str):
+def huffman_encoding(data: str) -> tuple:
     """
         Encodes the data with Huffman Coding Algorithm.
     """
+
+    if not isinstance(data, str):
+        raise ValueError("Input is not a string.")
+    
+    if not data:
+        raise ValueError("Empty strings cannot be encoded.")
 
     # Count char frequency in data, O(n)
     char_freq = {}
@@ -29,6 +35,11 @@ def huffman_encoding(data: str):
         else: 
             char_freq[char] = 1
     
+    # Check if data contains only one character
+    if len(char_freq) == 1:
+        char = list(char_freq.keys())[0]
+        return "0", Node(char, char_freq[char])
+
     # Iterate over char_freq dict, O(n)
     heap = []
     for char, freq in char_freq.items():
@@ -70,11 +81,13 @@ def huffman_decoding(encoded_data: str, root: Node) -> str:
     """
         Decodes Huffman encoded data. 
     """
+    # Check for edge case with only one character
+    if root.char:
+        return root.char * root.freq
 
+    # Iterate over bit string to decode data, O(n)
     decoded_data = ""
     node = root
-    
-    # Iterate over bit string to decode data, O(n)
     for bit in encoded_data:
         if bit == "0":
             node = node.left_child
@@ -87,11 +100,10 @@ def huffman_decoding(encoded_data: str, root: Node) -> str:
 
 
 # %%
-def test_huffman_coding():
+def test_huffman_coding(a_great_sentence = "The bird is the word"):
     """
         Tests functionality of Huffman algorithm.
     """
-    a_great_sentence = "The bird is the word"
 
     print ("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence)))
     print ("The content of the data is: {}\n".format(a_great_sentence))
@@ -104,9 +116,13 @@ def test_huffman_coding():
     decoded_data = huffman_decoding(encoded_data, root_node)
 
     print ("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
-    print ("The content of the encoded data is: {}\n".format(decoded_data))
+    print ("The content of the decoded data is: {}\n".format(decoded_data))
 
 if __name__ == "__main__":
-        test_huffman_coding()
-
+        # test_huffman_coding()
+        # test_huffman_coding("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUV")
+        test_huffman_coding("a")
+        # test_huffman_coding(None) # Returns ValueError: Input is not a string.
+        # test_huffman_coding("") # Returns ValueError: Empty strings cannot be encoded.
+    
 # %%

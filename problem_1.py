@@ -20,13 +20,11 @@ class LRU_Cache(object):
             return -1
 
     def set(self, key, value):
-        # Sets the value if the key is not present in the cache. 
         # If the cache is at capacity it removes the oldest item. 
-        if not self.cache.get(key): # time complexity of dict.get(key) is O(1)
-            if len(self.cache) == self.capacity:
-                self.cache.popitem(last=False) # time complexity of popitem() is  O(1)
-            self.cache[key] = value
-            self.cache.move_to_end(key) # time complexity of move_to_end() is O(1)
+        if len(self.cache) == self.capacity:
+            self.cache.popitem(last=False) # time complexity of popitem() is  O(1)
+        self.cache[key] = value
+        self.cache.move_to_end(key) # time complexity of move_to_end() is O(1)
 
 # %%
 def test_cache():
@@ -50,6 +48,13 @@ def test_cache():
     our_cache.set(7, 7)
     our_cache.set(8, 8)
     print(our_cache.get(3))       # returns -1 because the cache reached it's capacity and 3 was the least recently used entry
+
+    our_cache = LRU_Cache(5)
+
+    our_cache.set(1, 1)
+    print(our_cache.get(2))  # returns -1
+    our_cache.set(1, 11111)
+    print(our_cache.get(1))  # overriding a value, returns 11111
 
 
 if __name__ == "__main__":
