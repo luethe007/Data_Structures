@@ -7,6 +7,11 @@ class LRU_Cache(object):
     """
     
     def __init__(self, capacity: int):
+        # Check edge cases
+        if not isinstance(capacity, int):
+            raise ValueError("Input is not a number.")
+        if capacity < 1:
+            raise ValueError("Please enter a positive number.")
         # Initialize class variables
         self.capacity = capacity
         self.cache = OrderedDict()
@@ -49,14 +54,12 @@ def test_cache():
     our_cache.set(8, 8)
     print(our_cache.get(3))       # returns -1 because the cache reached it's capacity and 3 was the least recently used entry
 
-    our_cache = LRU_Cache(5)
+    # Test case with empty capacity
+    our_cache = LRU_Cache(0)        # returns ValueError
 
-    our_cache.set(1, 1)
-    print(our_cache.get(2))  # returns -1
-    our_cache.set(1, 11111)
-    print(our_cache.get(1))  # overriding a value, returns 11111
-
-
+    # Test case with empty capacity
+    our_cache = LRU_Cache(None)     # returns ValueError
+  
 if __name__ == "__main__":
     test_cache()
 # %%

@@ -119,10 +119,10 @@ def test_huffman_coding(a_great_sentence = "The bird is the word"):
     print ("The content of the decoded data is: {}\n".format(decoded_data))
 
 if __name__ == "__main__":
-        # test_huffman_coding()
-        # test_huffman_coding("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUV")
+        test_huffman_coding()
+        test_huffman_coding("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUV")
         test_huffman_coding("a")
-        # test_huffman_coding(None) # Returns ValueError: Input is not a string.
-        # test_huffman_coding("") # Returns ValueError: Empty strings cannot be encoded.
+        test_huffman_coding(None) # Returns ValueError: Input is not a string.
+        test_huffman_coding("") # Returns ValueError: Empty strings cannot be encoded.
     
 # %%

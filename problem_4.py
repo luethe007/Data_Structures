@@ -55,9 +55,10 @@ def is_user_in_group(user, group):
                 queue.append(group) # Requires O(1) time
     return False
 
-
-# %%
 def test_func():
+    """
+        Tests functionality of the BFS search.
+    """
     parent = Group("parent")
     child = Group("child")
     sub_child = Group("subchild")
@@ -71,7 +72,10 @@ def test_func():
     parent.add_group(shared_group)
     parent.add_group(child)
  
-    print(is_user_in_group("sub_child_user", parent))
+    print(is_user_in_group("sub_child_user", parent)) # returns True
+    print(is_user_in_group("non_existent_user", parent)) # returns False
+    print(is_user_in_group("", parent)) # returns False
+    print(is_user_in_group(None, parent)) # returns False
 
 if __name__ == "__main__":
     test_func()

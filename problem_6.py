@@ -96,6 +96,9 @@ def intersection(llist_1: LinkedList, llist_2: LinkedList) -> LinkedList:
 
 # %%
 def test_func():
+    """
+        Tests the functionality of the union and intersection functions.
+    """
     # Test case 1
     linked_list_1 = LinkedList()
     linked_list_2 = LinkedList()
@@ -109,8 +112,9 @@ def test_func():
     for i in element_2:
         linked_list_2.append(i)
 
-    print(union(linked_list_1,linked_list_2))
-    print(intersection(linked_list_1,linked_list_2))
+    print("Test Case 1")
+    print(union(linked_list_1,linked_list_2)) # returns 32 -> 2 -> 35 -> 3 -> 4 -> 6 -> 9 
+    print(intersection(linked_list_1,linked_list_2)) # returns 3 -> 4
 
     # Test case 2
     linked_list_3 = LinkedList()
@@ -125,9 +129,43 @@ def test_func():
     for i in element_2:
         linked_list_4.append(i)
 
-    print(union(linked_list_3,linked_list_4))
-    print(intersection(linked_list_3,linked_list_4))
+    print("Test Case 2")
+    print(union(linked_list_3,linked_list_4)) # returns 1 -> 66 -> 2 -> 3 -> 5 -> 7 -> 8
+    print(intersection(linked_list_3,linked_list_4)) # returns 8 -> 66
 
+    # Test case 3
+    linked_list_3 = LinkedList()
+    linked_list_4 = LinkedList()
+
+    element_1 = []
+    element_2 = [1,7,8,66]
+
+    for i in element_1:
+        linked_list_3.append(i)
+
+    for i in element_2:
+        linked_list_4.append(i)
+
+    print("Test Case 3")
+    print(union(linked_list_3,linked_list_4)) # returns 8 -> 1 -> 66 -> 7
+    print(intersection(linked_list_3,linked_list_4)) # returns empty linked list
+
+    # Test case 4
+    linked_list_3 = LinkedList()
+    linked_list_4 = LinkedList()
+
+    element_1 = []
+    element_2 = []
+
+    for i in element_1:
+        linked_list_3.append(i)
+
+    for i in element_2:
+        linked_list_4.append(i)
+
+    print("Test Case 4")
+    print(union(linked_list_3,linked_list_4)) # returns empty linked list
+    print(intersection(linked_list_3,linked_list_4)) # returns empty linked list
 
 if __name__ == "__main__":
     test_func()

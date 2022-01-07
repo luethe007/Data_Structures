@@ -7,6 +7,9 @@ def find_files(suffix: str, path: str) -> list:
         :param path: directory path to search through
         :return: list of file paths matching the suffix
     """
+    if not (isinstance(suffix, str) and isinstance(path, str)):
+        raise ValueError("Please insert string parameters.")
+
     paths = list()
     # Check if path is directory
     if not os.path.isdir(path):
@@ -33,6 +36,10 @@ def test_find_files():
     path = "./solution/problem2/problem2.py"
     suffix = ".py"
     print(find_files(suffix, path)) # returns ["./solution/problem2/problem2.py"]
+
+    print(find_files("", ""))       # returns [""]
+
+    print(find_files(None, None))   # returns ValueError
 
 if __name__ == "__main__":
     test_find_files()
